@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apropiaciones Digitales — Micrositio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-soft: #444;
+    --ink-muted: #888;
+    --bg: #f5f2eb;
+    --bg-card: #fff;
+    --accent: #1a3f5c;
+    --accent2: #c84b2f;
+    --accent3: #2d7a5e;
+    --accent4: #7c4db8;
+    --accent5: #c4872b;
+    --border: #d8d3c8;
+    --radius: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--accent);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  }
+  .nav-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 0.25rem; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+
+  p { color: var(--ink-soft); margin-bottom: 0.75rem; }
+
+  /* HERO */
+  #inicio {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: -80px; right: -120px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(26,63,92,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-bg2 {
+    position: absolute;
+    bottom: 0; left: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,75,47,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+  }
+  .hero-tag span { width: 6px; height: 6px; background: #6ff7c4; border-radius: 50%; display: inline-block; }
+
+  .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin: 1.5rem 0 2.5rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .student-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+  }
+  .student-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .student-name { font-weight: 500; font-size: 0.95rem; color: var(--ink); }
+  .student-code { font-size: 0.8rem; color: var(--ink-muted); }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+  .intro-stat {
+    background: var(--bg-card);
+    padding: 1.5rem;
+  }
+  .intro-stat .num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .intro-stat .lbl { font-size: 0.8rem; color: var(--ink-muted); }
+
+  /* DIVIDER */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 2rem;
+  }
+
+  /* CONCEPT CARDS */
+  .concept-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .concept-header {
+    padding: 1.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .concept-icon {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .icon-info { background: rgba(26,63,92,0.1); }
+  .icon-eco { background: rgba(45,122,94,0.1); }
+  .icon-sec { background: rgba(124,77,184,0.1); }
+
+  .concept-header-text h2 { margin-bottom: 0.1rem; font-size: 1.35rem; }
+  .concept-header-text p { font-size: 0.85rem; margin: 0; color: var(--ink-muted); }
+
+  .concept-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0;
+  }
+
+  .concept-item {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .concept-item:hover { background: var(--bg); }
+  .concept-item:last-child { border-right: none; }
+
+  .concept-pill {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin-bottom: 0.75rem;
+  }
+
+  .pill-blue { background: rgba(26,63,92,0.1); color: var(--accent); }
+  .pill-green { background: rgba(45,122,94,0.1); color: var(--accent3); }
+  .pill-purple { background: rgba(124,77,184,0.1); color: var(--accent4); }
+  .pill-red { background: rgba(200,75,47,0.1); color: var(--accent2); }
+  .pill-amber { background: rgba(196,135,43,0.1); color: var(--accent5); }
+
+  .concept-item h3 { font-size: 1rem; color: var(--ink); }
+  .concept-item p { font-size: 0.875rem; line-height: 1.6; margin: 0; }
+
+  /* QUOTE CALLOUT */
+  .callout {
+    border-left: 3px solid var(--accent2);
+    padding: 1rem 1.5rem;
+    background: rgba(200,75,47,0.04);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 1.5rem 0;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  /* REFLEXION */
+  #reflexion {
+    background: var(--accent);
+    max-width: 100%;
+    padding: 5rem 2rem;
+  }
+
+  #reflexion .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  #reflexion .section-label { color: rgba(255,255,255,0.5); }
+  #reflexion h2 { color: #fff; }
+
+  .reflexion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .reflexion-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .reflexion-card h3 {
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .reflexion-card p {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .reflexion-main {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-top: 1.5rem;
+    max-width: 700px;
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0a1a26;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+  }
+  footer strong { color: rgba(255,255,255,0.7); }
+
+  /* SECTION ACCENTS */
+  .accent-line {
+    width: 48px;
+    height: 3px;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+  .al-blue { background: var(--accent); }
+  .al-green { background: var(--accent3); }
+  .al-purple { background: var(--accent4); }
+  .al-red { background: var(--accent2); }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .reflexion-grid { grid-template-columns: 1fr; }
+    .concept-body { grid-template-columns: 1fr; }
+    .concept-item { border-right: none; }
+  }
+
+  /* FADE IN ANIMATION */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.34s; }
+  .delay-4 { animation-delay: 0.46s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Apropiaciones Digitales</div>
+  <div class="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#info-digital">Información Digital</a>
+    <a href="#economia">Economía Digital</a>
+    <a href="#derechos">Derechos y Seguridad</a>
+    <a href="#reflexion">Reflexión</a>
+  </div>
+</nav>
+
+<!-- HERO / INICIO -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-bg2"></div>
+
+  <div class="hero-tag fade-up"><span></span> Micrositio académico · Ciudadanía Digital</div>
+
+  <h1 class="fade-up delay-1">Apropiaciones<br>Digitales</h1>
+
+  <p class="hero-sub fade-up delay-2">
+    Un recorrido estructurado por los conceptos clave que definen cómo los ciudadanos habitamos, participamos y nos protegemos en el mundo digital. Desde el alfabetismo hasta los derechos, este micrositio organiza el conocimiento para comprender nuestra vida en red.
+  </p>
+
+  <div class="student-card fade-up delay-3">
+    <div class="student-avatar">AG</div>
+    <div>
+      <div class="student-name">Andres Felipe Galindo Morera</div>
+      <div class="student-code">Código: 121691 &nbsp;·&nbsp; Ciudadanía Digital</div>
+    </div>
+  </div>
+
+  <div class="intro-grid fade-up delay-4">
+    <div class="intro-stat">
+      <div class="num" style="color: var(--accent);">4</div>
+      <div class="lbl">Secciones temáticas</div>
+    </div>
+    <div class="intro-stat">
+      <div class="num" style="color: var(--accent3);">9</div>
+      <div class="lbl">Conceptos fundamentales</div>
+    </div>
+    <div class="intro-stat">
+      <div class="num" style="color: var(--accent4);">1</div>
+      <div class="lbl">Reflexión personal</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECCIÓN 1: INFORMACIÓN DIGITAL -->
+<section id="info-digital">
+  <div class="section-label">Sección 1</div>
+  <div class="accent-line al-blue"></div>
+  <h2>Información digital</h2>
+  <p style="max-width:600px; margin-bottom:2rem;">
+    La manera en que accedemos, evaluamos y compartimos información define nuestra participación en la sociedad del conocimiento. Estas competencias son la base de la ciudadanía digital.
+  </p>
+
+  <div class="concept-section">
+    <div class="concept-header">
+      <div class="concept-icon icon-info">📚</div>
+      <div class="concept-header-text">
+        <h2>Alfabetismo, comunicación y netiqueta</h2>
+        <p>Fundamentos para navegar, entender y relacionarse en entornos digitales</p>
+      </div>
+    </div>
+    <div class="concept-body">
+      <div class="concept-item">
+        <span class="concept-pill pill-blue">Alfabetismo Digital</span>
+        <h3>¿Qué es el alfabetismo digital?</h3>
+        <p>Es la capacidad de encontrar, evaluar, crear y comunicar información usando tecnologías digitales. Va más allá de saber usar un celular: implica pensamiento crítico frente a la información que consumimos y producimos en línea.</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-pill pill-blue">Comunicación</span>
+        <h3>Comunicación digital</h3>
+        <p>Abarca todas las formas en que intercambiamos mensajes mediante medios tecnológicos: correo electrónico, redes sociales, videollamadas, foros. Cada canal tiene sus propias normas, velocidades y alcances.</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-pill pill-blue">Netiqueta</span>
+        <h3>Netiqueta</h3>
+        <p>Conjunto de normas de comportamiento ético y cortés en internet. Incluye no hacer spam, no compartir información falsa, respetar la privacidad ajena, y comunicarse con respeto sin importar el anonimato.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    "El alfabetismo digital no se trata solo de habilidades técnicas, sino de la capacidad de participar plena y críticamente en una sociedad mediada por tecnología."
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECCIÓN 2: ECONOMÍA DIGITAL -->
+<section id="economia">
+  <div class="section-label">Sección 2</div>
+  <div class="accent-line al-green"></div>
+  <h2>Procesos económicos digitales</h2>
+  <p style="max-width:600px; margin-bottom:2rem;">
+    La economía se transforma gracias a plataformas digitales que cambian cómo compramos, vendemos, trabajamos y colaboramos. Entender estos procesos es clave para participar como consumidores y productores digitales.
+  </p>
+
+  <div class="concept-section">
+    <div class="concept-header">
+      <div class="concept-icon icon-eco">💹</div>
+      <div class="concept-header-text">
+        <h2>Economía colaborativa y comercio electrónico</h2>
+        <p>Nuevas formas de producción, intercambio y consumo en el entorno digital</p>
+      </div>
+    </div>
+    <div class="concept-body">
+      <div class="concept-item">
+        <span class="concept-pill pill-green">Economía Colaborativa</span>
+        <h3>¿Qué es la economía colaborativa?</h3>
+        <p>Modelo económico basado en compartir, intercambiar o alquilar bienes y servicios a través de plataformas digitales. Ejemplos: Uber, Airbnb, plataformas de freelance. Reduce costos y democratiza el acceso a recursos.</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-pill pill-green">Comercio Electrónico</span>
+        <h3>Comercio electrónico (e-commerce)</h3>
+        <p>Compra y venta de productos o servicios mediante internet. Incluye tiendas virtuales, marketplaces (MercadoLibre, Amazon) y pagos digitales. Ha transformado los hábitos de consumo a nivel global y local.</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-pill pill-green">Impacto</span>
+        <h3>Impacto en Colombia y Latinoamérica</h3>
+        <p>El comercio electrónico en Colombia ha crecido sostenidamente. Plataformas como Rappi nacieron en Bogotá y transformaron el mercado regional, generando nuevas formas de empleo y emprendimiento digital.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECCIÓN 3: DERECHOS DIGITALES -->
+<section id="derechos">
+  <div class="section-label">Sección 3</div>
+  <div class="accent-line al-purple"></div>
+  <h2>Derechos digitales y seguridad en línea</h2>
+  <p style="max-width:600px; margin-bottom:2rem;">
+    En el mundo digital también somos titulares de derechos. Proteger nuestra información y conocer nuestros deberes como ciudadanos digitales es fundamental para una participación segura y responsable.
+  </p>
+
+  <div class="concept-section">
+    <div class="concept-header">
+      <div class="concept-icon icon-sec">🔐</div>
+      <div class="concept-header-text">
+        <h2>Protección de datos y deberes ciudadanos</h2>
+        <p>Marco legal, ético y práctico para protegerse y actuar responsablemente en línea</p>
+      </div>
+    </div>
+    <div class="concept-body">
+      <div class="concept-item">
+        <span class="concept-pill pill-purple">Datos Personales</span>
+        <h3>Protección de datos personales</h3>
+        <p>En Colombia, la Ley 1581 de 2012 regula el tratamiento de datos personales. Todo ciudadano tiene derecho a saber qué datos se recopilan sobre él, para qué se usan, y puede solicitar su corrección o eliminación (habeas data).</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-pill pill-purple">Seguridad en Línea</span>
+        <h3>Seguridad en línea</h3>
+        <p>Conjunto de prácticas para protegerse de amenazas digitales: contraseñas seguras, verificación en dos pasos, actualizaciones de software, reconocimiento de phishing y uso de redes seguras.</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-pill pill-red">Deberes Ciudadanos</span>
+        <h3>Deberes del ciudadano digital</h3>
+        <p>No solo tenemos derechos: también deberes. No compartir desinformación, respetar la privacidad de otros, usar responsablemente las redes, no participar en ciberacoso, y reportar contenidos ilegales son compromisos del ciudadano digital.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    El derecho al habeas data nos permite conocer, actualizar y rectificar la información que sobre nosotros se guarda en bases de datos públicas o privadas — un derecho fundamental en la era digital.
+  </div>
+</section>
+
+<!-- REFLEXIÓN -->
+<section id="reflexion" style="padding: 0;">
+<div id="reflexion" style="background: var(--accent); padding: 5rem 2rem;">
+  <div class="inner">
+    <div class="section-label">Sección final</div>
+    <h2 style="color: #fff;">Reflexión personal</h2>
+    <p class="reflexion-main">
+      Los conceptos de apropiación digital no son abstractos — los vivo cada día. Cuando verifico una noticia antes de compartirla en WhatsApp estoy ejerciendo alfabetismo digital. Cuando compro en línea o uso aplicaciones de domicilios participo en la economía colaborativa. Cuando protejo mis contraseñas y reviso los permisos de mis apps cuido mis derechos digitales.
+    </p>
+    <p class="reflexion-main" style="margin-top: 1rem;">
+      En mi entorno social, noto que muchas personas comparten información sin verificarla, o desconocen sus derechos sobre sus datos. Creo que la educación digital no es un lujo sino una necesidad para todos los colombianos, ya que la participación social, económica y política ocurre cada vez más en espacios digitales. Ser un ciudadano digital responsable impacta directamente en la salud de nuestra democracia y nuestra economía.
+    </p>
+
+    <div class="reflexion-grid">
+      <div class="reflexion-card">
+        <h3>En mi vida cotidiana</h3>
+        <p>Verifico fuentes antes de compartir, uso contraseñas distintas para cada plataforma y reviso la configuración de privacidad en mis redes sociales.</p>
+      </div>
+      <div class="reflexion-card">
+        <h3>En mi entorno social</h3>
+        <p>Promuevo el pensamiento crítico frente a noticias en grupos de familia y comparto con mis pares información sobre cómo proteger sus datos personales.</p>
+      </div>
+      <div class="reflexion-card">
+        <h3>Impacto cultural</h3>
+        <p>La apropiación digital sana fortalece comunidades: genera confianza, reduce la desinformación y permite que más personas accedan a oportunidades económicas digitales.</p>
+      </div>
+      <div class="reflexion-card">
+        <h3>Compromiso a futuro</h3>
+        <p>Seguir aprendiendo sobre ciberseguridad y derechos digitales, y compartir ese conocimiento como una forma de construir ciudadanía activa en la era digital.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Apropiaciones Digitales</strong> — Actividad académica · Ciudadanía Digital<br>
+  Andres Felipe Galindo Morera · Código 121691
+</footer>
+
+</body>
+</html>
